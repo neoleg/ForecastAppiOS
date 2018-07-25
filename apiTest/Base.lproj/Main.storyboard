@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Standart view-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="viewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -168,23 +168,14 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Piw-Dw-0AF"/>
                                 </connections>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Tp-p2-xBH">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem title="show" id="6Nz-Mc-Au8">
-                                        <connections>
-                                            <action selector="show:" destination="BYZ-38-t0r" id="nDy-Di-avL"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="231" style="plain" systemItem="fixedSpace" id="GaP-K8-iRQ"/>
-                                    <barButtonItem title="present" id="BXb-ft-JnG">
-                                        <connections>
-                                            <action selector="present:" destination="BYZ-38-t0r" id="e6e-NQ-Fdb"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-h5-dhs" customClass="GADBannerView">
+                                <rect key="frame" x="27.5" y="617" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="1Js-0q-DjA"/>
+                                    <constraint firstAttribute="height" constant="50" id="Itq-mc-DaS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -196,6 +187,7 @@
                             <constraint firstItem="a3Y-kW-bdH" firstAttribute="top" secondItem="tTk-Ch-Yqc" secondAttribute="bottom" constant="36" id="HO3-aE-Urw"/>
                             <constraint firstItem="pcD-2T-EFE" firstAttribute="top" secondItem="a3Y-kW-bdH" secondAttribute="bottom" constant="18" id="HaP-yV-HPt"/>
                             <constraint firstItem="9t4-T5-6oJ" firstAttribute="top" secondItem="tTk-Ch-Yqc" secondAttribute="bottom" constant="19" id="P0s-Ks-GNr"/>
+                            <constraint firstItem="W4d-h5-dhs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Pe5-nf-Tyd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pcD-2T-EFE" secondAttribute="trailing" constant="8" id="RSu-UE-Q3z"/>
                             <constraint firstItem="44x-QF-qk0" firstAttribute="height" secondItem="gcu-wd-Eby" secondAttribute="height" id="S5B-N0-fvY"/>
                             <constraint firstItem="44x-QF-qk0" firstAttribute="top" secondItem="gcu-wd-Eby" secondAttribute="top" id="Txc-fl-Ghf"/>
@@ -208,20 +200,27 @@
                             <constraint firstItem="owa-sd-lxI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eQT-1d-ReC"/>
                             <constraint firstItem="tTk-Ch-Yqc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fMl-yK-1fd"/>
                             <constraint firstItem="Xc5-o5-NYK" firstAttribute="top" secondItem="a3Y-kW-bdH" secondAttribute="bottom" constant="15" id="g7c-Oc-1KI"/>
+                            <constraint firstItem="W4d-h5-dhs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mec-DI-JTB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a3Y-kW-bdH" secondAttribute="trailing" constant="8" id="sSd-EJ-vNc"/>
                             <constraint firstItem="pcD-2T-EFE" firstAttribute="leading" secondItem="Xc5-o5-NYK" secondAttribute="trailing" constant="8" id="sUO-Vy-m69"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LTS-C8-jhr"/>
+                    <navigationItem key="navigationItem" title="Standart view" id="gQB-qe-iXA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="bmg-hO-nAv">
+                            <connections>
+                                <segue destination="UEe-Y2-jgu" kind="show" id="cnC-zk-58K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="W4d-h5-dhs" id="U4L-e3-AfC"/>
                         <outlet property="cityNameField" destination="44x-QF-qk0" id="2t0-uo-mmw"/>
                         <outlet property="cityNameLabel" destination="tTk-Ch-Yqc" id="cA5-yU-S4O"/>
                         <outlet property="cityNameLabelHeight" destination="Aif-uP-EO1" id="bpK-51-GYv"/>
                         <outlet property="forecastCollection" destination="owa-sd-lxI" id="Vvg-GI-Tmx"/>
                         <outlet property="searchButton" destination="gcu-wd-Eby" id="gYi-Xc-Fr3"/>
                         <outlet property="temperatureLabel" destination="a3Y-kW-bdH" id="j15-2J-Eu0"/>
-                        <outlet property="toolbar" destination="3Tp-p2-xBH" id="WMH-ru-bPy"/>
                         <outlet property="weatherImage" destination="9t4-T5-6oJ" id="omo-YL-gMA"/>
                         <outlet property="windSpeedLabel" destination="Xc5-o5-NYK" id="LUo-Ln-u2k"/>
                     </connections>
@@ -230,7 +229,7 @@
             </objects>
             <point key="canvasLocation" x="-55.200000000000003" y="131.78410794602701"/>
         </scene>
-        <!--List View Controller-->
+        <!--List view-->
         <scene sceneID="yUy-EA-xOY">
             <objects>
                 <viewController storyboardIdentifier="listViewController" id="UEe-Y2-jgu" customClass="ListViewController" sceneMemberID="viewController">
@@ -239,7 +238,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fSu-aO-XIH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MoR-G3-Iz9">
                                     <size key="itemSize" width="375" height="93"/>
@@ -297,31 +296,18 @@
                                     <outlet property="delegate" destination="UEe-Y2-jgu" id="P7E-kV-Lbk"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nE-g9-CKk">
-                                <rect key="frame" x="8" y="619" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="MGr-Ln-R3M"/>
-                                    <constraint firstAttribute="width" constant="40" id="Mhv-cS-TOr"/>
-                                    <constraint firstAttribute="width" secondItem="7nE-g9-CKk" secondAttribute="height" multiplier="1:1" id="TQz-d6-exS"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="icons8-back-52"/>
-                                <connections>
-                                    <action selector="backButtonClicked:" destination="UEe-Y2-jgu" eventType="touchUpInside" id="oCd-DA-p0c"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="7nE-g9-CKk" firstAttribute="top" secondItem="fSu-aO-XIH" secondAttribute="bottom" constant="8" id="FxN-2g-NSz"/>
+                            <constraint firstItem="fSu-aO-XIH" firstAttribute="top" secondItem="E5Y-Ay-gkQ" secondAttribute="top" id="9Rm-aL-qvQ"/>
                             <constraint firstItem="fSu-aO-XIH" firstAttribute="top" secondItem="E5Y-Ay-gkQ" secondAttribute="top" id="Lcr-ta-i1f"/>
-                            <constraint firstItem="E5Y-Ay-gkQ" firstAttribute="bottom" secondItem="7nE-g9-CKk" secondAttribute="bottom" constant="8" id="Z2s-Yv-hph"/>
                             <constraint firstItem="fSu-aO-XIH" firstAttribute="trailing" secondItem="E5Y-Ay-gkQ" secondAttribute="trailing" id="akG-BY-zwY"/>
                             <constraint firstItem="fSu-aO-XIH" firstAttribute="leading" secondItem="E5Y-Ay-gkQ" secondAttribute="leading" id="dCS-dq-jhC"/>
-                            <constraint firstItem="7nE-g9-CKk" firstAttribute="leading" secondItem="E5Y-Ay-gkQ" secondAttribute="leading" constant="8" id="hup-II-zzE"/>
+                            <constraint firstItem="E5Y-Ay-gkQ" firstAttribute="bottom" secondItem="fSu-aO-XIH" secondAttribute="bottom" id="jzm-9w-aGz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="E5Y-Ay-gkQ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pQM-a6-Qp7"/>
+                    <navigationItem key="navigationItem" title="List view" id="pQM-a6-Qp7"/>
                     <connections>
                         <outlet property="collectionView" destination="fSu-aO-XIH" id="hJL-vZ-xaG"/>
                     </connections>
@@ -333,7 +319,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OVD-q5-LbG">
             <objects>
-                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" id="yRO-7C-YYu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="yRO-7C-YYu" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e6W-iC-gnU">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -348,7 +334,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-back-52" width="52" height="52"/>
         <image name="windIcon" width="100" height="100"/>
     </resources>
 </document>

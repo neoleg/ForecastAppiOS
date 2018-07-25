@@ -14,6 +14,7 @@
 #import "ListViewController.h"
 #import "DataManager.h"
 #import "UIImageView+ImageWithUrl.h"
+@import GoogleMobileAds;
 
 #define kCellId                 @"cell"
 
@@ -27,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *forecastCollection;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cityNameLabelHeight;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 
 @property (strong, nonatomic) NSArray* forecast;
 
@@ -42,6 +43,7 @@
     [super viewDidLoad];
     //[[DataManager dataManager] clearCore];
     [self loadForecast:nil];
+    [self addBanner];
 
 }
 
@@ -50,7 +52,6 @@
     NSString *cityName = self.cityNameField.text;
     [self.searchButton setEnabled:false];
     [self loadForecast:cityName];
-    
 }
 
 
@@ -150,7 +151,7 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
+/*
 - (IBAction)present:(UIBarButtonItem *)sender {
      ListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"listViewController"];
     [self presentViewController:listViewController animated:YES completion:nil];
@@ -160,6 +161,18 @@
     ListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"listViewController"];
     [self.navigationController showViewController:listViewController sender:sender];
     
+}
+*/
+
+#pragma mark - advertesing
+
+
+- (void) addBanner {
+    self.bannerView.adUnitID = @"ca-app-pub-2355698657310174/5553214788";
+    self.bannerView.rootViewController = self;
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[ kGADSimulatorID ];
+    [self.bannerView loadRequest:request];
 }
 
 @end
