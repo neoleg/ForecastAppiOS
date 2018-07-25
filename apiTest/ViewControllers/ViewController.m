@@ -16,8 +16,6 @@
 #import "UIImageView+ImageWithUrl.h"
 @import GoogleMobileAds;
 
-#define kCellId                 @"cell"
-
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameField;
@@ -39,6 +37,7 @@
 
 @synthesize forecastCollection;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //[[DataManager dataManager] clearCore];
@@ -46,6 +45,7 @@
     [self addBanner];
 
 }
+
 
 - (IBAction)searchAction:(UIButton *)sender {
     
@@ -151,6 +151,8 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
+
+
 /*
 - (IBAction)present:(UIBarButtonItem *)sender {
      ListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"listViewController"];
@@ -164,7 +166,8 @@
 }
 */
 
-#pragma mark - advertesing
+
+#pragma mark - advertising
 
 
 - (void) addBanner {
