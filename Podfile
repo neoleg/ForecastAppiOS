@@ -6,6 +6,7 @@ target 'apiTest' do
   use_frameworks!
   pod 'AFNetworking', '~> 3.0'
   pod 'SDWebImage', '~> 4.0'
+  pod 'Google-Mobile-Ads-SDK'
   # Pods for apiTest
 
 end
