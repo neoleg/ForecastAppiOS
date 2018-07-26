@@ -15,9 +15,10 @@
 #import "DataManager.h"
 #import "UIImageView+ImageWithUrl.h"
 #import "MBProgressHUD.h"
+#import <CoreLocation/CoreLocation.h>
 @import GoogleMobileAds;
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameField;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
@@ -30,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet GADBannerView *bannerView;
 
 @property (strong, nonatomic) NSArray* forecast;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -42,11 +44,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //[[DataManager dataManager] clearCore];
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [self loadForecast:nil];
-    [self addBanner];
+
+    //[self loadForecast:nil];
+    [self loadForCurrentLocation];
+    [self initBanner];
+    [self addAdvertisment];
 
 }
 
@@ -175,12 +178,48 @@
 #pragma mark - advertising
 
 
-- (void) addBanner {
+- (void) initBanner {
     self.bannerView.adUnitID = @"ca-app-pub-2355698657310174/5553214788";
     self.bannerView.rootViewController = self;
+}
+
+- (void) addAdvertisment {
     GADRequest *request = [GADRequest request];
     request.testDevices = @[ kGADSimulatorID ];
     [self.bannerView loadRequest:request];
 }
+
+
+#pragma mark - Location
+
+
+- (void) loadForCurrentLocation {
+    
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestLocation];
+    
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray<CLLocation *> *)locations API_AVAILABLE(ios(6.0), macos(10.9)) {
+    CLGeocoder *geocoder = [CLGeocoder new];
+    __block NSString *cityName = nil;
+    
+    [geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
+        cityName = myPlacemark.locality;
+        [self loadForecast:cityName];
+    }];
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    NSLog(@"%@",error);
+}
+
 
 @end

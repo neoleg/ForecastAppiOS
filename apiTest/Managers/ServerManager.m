@@ -9,6 +9,13 @@
 #import "ServerManager.h"
 #import "AFNetworking.h"
 
+//CoreLocation
+//Permitions
+//Auth Status
+//Get current location
+//Get city using Geocoder
+//Display forecast for current city
+
 @implementation ServerManager
 
 + (ServerManager*) sharedManager {   //singletone
@@ -98,20 +105,28 @@
             
             NSMutableDictionary *dict = [NSMutableDictionary new];
             NSDictionary *listItem = list[i];
+            
+            // temperature
+            
             NSString *temperatureValue = [[listItem objectForKey:@"main"] objectForKey:@"temp"];
             NSString *temperature = [NSString stringWithFormat:@"%ld°", [temperatureValue integerValue]];
+            
+            [dict setObject:temperature forKey:@"temp"];
            
+            //date and time
+            
             NSString* dateString = [list[i] objectForKey:@"dt_txt"];
             NSDate *date = [dateFormat dateFromString:dateString];
-            
+
             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
-            
+
             NSString* formatedTime = [NSString stringWithFormat:@"%02ld.%02ld",components.hour, components.minute];
             NSString* formatedDate = [NSString stringWithFormat:@"%02ld.%02ld",components.day, components.month];
             
-            [dict setObject:temperature forKey:@"temp"];
             [dict setObject:formatedDate forKey:@"date"];
             [dict setObject:formatedTime forKey:@"time"];
+            
+            //icons
             
             NSArray *weather = [listItem objectForKey:@"weather"];
             NSDictionary *weatherItem = weather.firstObject;
