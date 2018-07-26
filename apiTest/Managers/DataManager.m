@@ -82,7 +82,6 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Forecast" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-//    fetchRequest.fetchLimit = 1;
     
     NSError *error = nil;
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -138,10 +137,5 @@
         abort();
     }
 }
-
-
-
-
-
 
 @end

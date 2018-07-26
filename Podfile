@@ -7,6 +7,7 @@ target 'apiTest' do
   pod 'AFNetworking', '~> 3.0'
   pod 'SDWebImage', '~> 4.0'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'MBProgressHUD', '~> 1.1.0'
   # Pods for apiTest
 
 end

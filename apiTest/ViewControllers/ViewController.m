@@ -126,7 +126,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return [self.forecast count] - 1;
+    return self.forecast.count - 1;
 }
 
 
