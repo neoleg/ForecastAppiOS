@@ -8,7 +8,6 @@
 
 #import "ServerManager.h"
 #import "AFNetworking.h"
-#import "ViewController.h"
 
 @implementation ServerManager
 
@@ -62,56 +61,69 @@
 
 - (NSArray *) parseResponse:(NSDictionary *)forecast {
     
-    //NSLog(@"%@",forecast);
+    NSMutableArray *array = [NSMutableArray new];
     
-    NSString *cityName = [NSString stringWithFormat:@"%@", [[forecast objectForKey:@"city"] objectForKey:@"name"]];
-    NSString* date = [[forecast objectForKey:@"list"][0] objectForKey:@"dt_txt"];
-    NSString *windSpeed = [NSString stringWithFormat:@"%@", [[[forecast objectForKey:@"list"][0] objectForKey:@"wind"] objectForKey:@"speed"]];
-    windSpeed = [windSpeed substringToIndex:3];
+    NSArray *list = [forecast objectForKey:@"list"];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    
-    NSDictionary *infoDict = @{@"cityName":cityName,
-                               @"windSpeed":windSpeed
-                               };
-    
-    //prepare date and time
-    
-    NSRange dayRange = NSMakeRange(8, 2);
-    NSRange monthRange = NSMakeRange(5, 2);
-    NSRange timeRange = NSMakeRange(11, 5);
-    
-    NSString* dayString = [date substringWithRange:dayRange];
-    NSString* monthString = [date substringWithRange:monthRange];
-    NSString* timeString = [date substringWithRange:timeRange];
-    
-    NSString* formatedDate = [NSString stringWithFormat:@"%@.%@",dayString,monthString];
-    NSString *temperature = @"";
-    
-    NSInteger responceDictSize = [[forecast objectForKey:@"list"] count];
-    
-    for (int i = 0; i < responceDictSize; i++) {
+    if (list.count != 0) {
         
-        temperature = [NSString stringWithFormat:@"%@",[[[forecast objectForKey:@"list"][i] objectForKey:@"main"] objectForKey:@"temp"]];
-        NSInteger x = [temperature integerValue];
-        temperature = [NSString stringWithFormat:@"%ld°", x];
+        NSString *cityName = [[forecast objectForKey:@"city"] objectForKey:@"name"];
+        cityName = nil != cityName ? cityName : @"No city";
         
-        date = [[forecast objectForKey:@"list"][i] objectForKey:@"dt_txt"];
-        dayString = [date substringWithRange:dayRange];
-        monthString = [date substringWithRange:monthRange];
-        timeString = [date substringWithRange:timeRange];
-        formatedDate = [NSString stringWithFormat:@"%@.%@",dayString,monthString];
-         
-        [dict setObject:temperature forKey:@"temp"];                                                                                //temp
-        [dict setObject:[[[forecast objectForKey:@"list"][i] objectForKey:@"weather"][0] objectForKey:@"main"] forKey:@"icon"];     //icon
-        [dict setObject:formatedDate forKey:@"date"];                                                                               //date
-        [dict setObject:timeString forKey:@"time"];                                                                                 //time
+        NSString *windSpeed = nil;
+        id speedValue = [[list[0] objectForKey:@"wind"] objectForKey:@"speed"];
+        NSLog(@"%@", NSStringFromClass([speedValue class]));
+        BOOL isCorrectSpeed = YES;
+        if ([speedValue isKindOfClass:[NSNumber class]]) {
+            windSpeed = [speedValue stringValue];
+        } else if ([speedValue isKindOfClass:[NSString class]]) {
+            windSpeed = speedValue;
+        } else {
+            isCorrectSpeed = NO;
+        }
+        if (isCorrectSpeed) {
+            windSpeed = [windSpeed substringToIndex:3];
+        } else {
+            windSpeed = @"No wind speed";
+        }
+        NSDictionary *infoDict = @{@"cityName":cityName,
+                                   @"windSpeed":windSpeed
+                                   };
         
-        [array addObject:[dict copy]];
+        for (int i = 0; i < list.count; i++) {
+            
+            NSMutableDictionary *dict = [NSMutableDictionary new];
+            NSDictionary *listItem = list[i];
+            NSString *temperatureValue = [[listItem objectForKey:@"main"] objectForKey:@"temp"];
+            NSString *temperature = [NSString stringWithFormat:@"%ld°", [temperatureValue integerValue]];
+            
+            NSRange dayRange = NSMakeRange(8, 2);
+            NSRange monthRange = NSMakeRange(5, 2);
+            NSRange timeRange = NSMakeRange(11, 5);
+            
+            NSString* date = [listItem objectForKey:@"dt_txt"];
+            NSString* dayString = [date substringWithRange:dayRange];
+            NSString* monthString = [date substringWithRange:monthRange];
+            NSString* timeString = [date substringWithRange:timeRange];
+            NSString* formatedDate = [NSString stringWithFormat:@"%@.%@", dayString, monthString];
+            
+            [dict setObject:temperature forKey:@"temp"];
+            [dict setObject:formatedDate forKey:@"date"];
+            [dict setObject:timeString forKey:@"time"];
+            
+            NSArray *weather = [listItem objectForKey:@"weather"];
+            NSDictionary *weatherItem = weather.firstObject;
+            NSString *icon = [weatherItem valueForKeyPath:@"main"];
+            if (nil == icon) {
+                icon = @"";
+            }
+            [dict setObject:icon forKey:@"icon"];
+            
+            [array addObject:dict];
+        }
+        
+        [array addObject:infoDict];
     }
-    
-    [array addObject:infoDict];
     
     return array;
 }

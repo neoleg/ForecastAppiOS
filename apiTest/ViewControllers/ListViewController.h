@@ -11,12 +11,6 @@
 
 @interface ListViewController : UIViewController
 
-@property (strong, nonatomic) NSDictionary *storedData;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
-
-- (void) insertNewForecastFor:(NSString *) cityName
-                     withIcon:(NSString *) icon
-               andTemperature:(NSString *) temperature;
 
 @end

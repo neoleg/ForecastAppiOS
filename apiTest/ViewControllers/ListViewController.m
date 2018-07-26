@@ -17,7 +17,7 @@
 @interface ListViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property NSMutableSet *namesSet;
+//@property NSMutableSet *namesSet;
 
 @end
 
@@ -49,9 +49,9 @@
     ListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[ListCollectionViewCell cellId] forIndexPath:indexPath];
     
     Forecast *forecast = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.cityNameLabel.text = forecast.name.description;
-    cell.temperatureLabel.text = forecast.temperature.description;
-    [cell.weatherIcon setupImageNamed:forecast.icon.description];
+    cell.cityNameLabel.text = forecast.name;
+    cell.temperatureLabel.text = forecast.temperature;
+    [cell.weatherIcon setupImageNamed:forecast.icon];
      
     return cell;
 }
@@ -83,34 +83,8 @@
         abort();
     }
     
-    if ([[[aFetchedResultsController fetchedObjects] valueForKey:@"name"] count] != 0) {
-        self.namesSet = [NSMutableSet setWithArray:[[aFetchedResultsController fetchedObjects] valueForKey:@"name"]];
-    }
     _fetchedResultsController = aFetchedResultsController;
     return _fetchedResultsController;
-}
-
-
-- (void) insertNewForecastFor:(NSString *) cityName
-                     withIcon:(NSString *) icon
-               andTemperature:(NSString *) temperature {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    
-    if (![self.namesSet containsObject:cityName]) {
-        NSLog(@"added");
-        Forecast *newForecast = [[Forecast alloc] initWithContext:context];
-        newForecast.name = cityName;
-        newForecast.temperature = temperature;
-        newForecast.icon = icon;
-        [self.namesSet addObject:cityName];
-    }
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-        abort();
-    }
-    [self.collectionView reloadData];
 }
 
 @end
