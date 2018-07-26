@@ -14,6 +14,7 @@
 #import "ListViewController.h"
 #import "DataManager.h"
 #import "UIImageView+ImageWithUrl.h"
+#import "MBProgressHUD.h"
 @import GoogleMobileAds;
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -41,6 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //[[DataManager dataManager] clearCore];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [self loadForecast:nil];
     [self addBanner];
 
@@ -48,7 +52,7 @@
 
 
 - (IBAction)searchAction:(UIButton *)sender {
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *cityName = self.cityNameField.text;
     [self.searchButton setEnabled:false];
     [self loadForecast:cityName];
@@ -62,7 +66,6 @@
         NSString *cityName = [[self.forecast lastObject] objectForKey:@"cityName"];
         NSString *temperature = [self.forecast[0] objectForKey:@"temp"];
         NSString *windSpeed = [[self.forecast lastObject] objectForKey:@"windSpeed"];
-        //windSpeed = [windSpeed substringToIndex:3];
         NSString* weatherIconName = [self.forecast[0] objectForKey:@"icon"];
         
         // setup text data
@@ -96,6 +99,8 @@
         [errorAlert addAction:defaultAction];
         [self presentViewController:errorAlert animated:YES completion:nil];
     }
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 

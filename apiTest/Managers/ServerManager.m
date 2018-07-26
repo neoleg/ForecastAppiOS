@@ -72,7 +72,7 @@
         
         NSString *windSpeed = nil;
         id speedValue = [[list[0] objectForKey:@"wind"] objectForKey:@"speed"];
-        NSLog(@"%@", NSStringFromClass([speedValue class]));
+    
         BOOL isCorrectSpeed = YES;
         if ([speedValue isKindOfClass:[NSNumber class]]) {
             windSpeed = [speedValue stringValue];
@@ -89,6 +89,10 @@
         NSDictionary *infoDict = @{@"cityName":cityName,
                                    @"windSpeed":windSpeed
                                    };
+
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
         
         for (int i = 0; i < list.count; i++) {
             
@@ -96,20 +100,18 @@
             NSDictionary *listItem = list[i];
             NSString *temperatureValue = [[listItem objectForKey:@"main"] objectForKey:@"temp"];
             NSString *temperature = [NSString stringWithFormat:@"%ld°", [temperatureValue integerValue]];
+           
+            NSString* dateString = [list[i] objectForKey:@"dt_txt"];
+            NSDate *date = [dateFormat dateFromString:dateString];
             
-            NSRange dayRange = NSMakeRange(8, 2);
-            NSRange monthRange = NSMakeRange(5, 2);
-            NSRange timeRange = NSMakeRange(11, 5);
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
             
-            NSString* date = [listItem objectForKey:@"dt_txt"];
-            NSString* dayString = [date substringWithRange:dayRange];
-            NSString* monthString = [date substringWithRange:monthRange];
-            NSString* timeString = [date substringWithRange:timeRange];
-            NSString* formatedDate = [NSString stringWithFormat:@"%@.%@", dayString, monthString];
+            NSString* formatedTime = [NSString stringWithFormat:@"%02ld.%02ld",components.hour, components.minute];
+            NSString* formatedDate = [NSString stringWithFormat:@"%02ld.%02ld",components.day, components.month];
             
             [dict setObject:temperature forKey:@"temp"];
             [dict setObject:formatedDate forKey:@"date"];
-            [dict setObject:timeString forKey:@"time"];
+            [dict setObject:formatedTime forKey:@"time"];
             
             NSArray *weather = [listItem objectForKey:@"weather"];
             NSDictionary *weatherItem = weather.firstObject;
