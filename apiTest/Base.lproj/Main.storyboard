@@ -176,6 +176,15 @@
                                     <constraint firstAttribute="height" constant="50" id="Itq-mc-DaS"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slN-ju-N60">
+                                <rect key="frame" x="287" y="72" width="40" height="40"/>
+                                <state key="normal" image="geolocation icon">
+                                    <color key="titleShadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="currentLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J4X-JG-Ubr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -195,12 +204,16 @@
                             <constraint firstItem="9t4-T5-6oJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="49" id="Wj9-kJ-efa"/>
                             <constraint firstItem="gcu-wd-Eby" firstAttribute="leading" secondItem="44x-QF-qk0" secondAttribute="trailing" id="Yqi-VB-4Dt"/>
                             <constraint firstItem="gcu-wd-Eby" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="aNs-iO-3Jr"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="width" secondItem="gcu-wd-Eby" secondAttribute="width" id="aa3-36-f6Z"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="height" secondItem="gcu-wd-Eby" secondAttribute="height" id="aok-fq-lSO"/>
                             <constraint firstItem="Xc5-o5-NYK" firstAttribute="leading" secondItem="JyZ-mA-5Pa" secondAttribute="trailing" constant="8" id="dPM-d1-D8k"/>
                             <constraint firstItem="a3Y-kW-bdH" firstAttribute="leading" secondItem="9t4-T5-6oJ" secondAttribute="trailing" constant="83" id="eJa-7M-xKy"/>
                             <constraint firstItem="owa-sd-lxI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eQT-1d-ReC"/>
                             <constraint firstItem="tTk-Ch-Yqc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fMl-yK-1fd"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fsp-Uh-YgQ"/>
                             <constraint firstItem="Xc5-o5-NYK" firstAttribute="top" secondItem="a3Y-kW-bdH" secondAttribute="bottom" constant="15" id="g7c-Oc-1KI"/>
                             <constraint firstItem="W4d-h5-dhs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mec-DI-JTB"/>
+                            <constraint firstItem="gcu-wd-Eby" firstAttribute="leading" secondItem="slN-ju-N60" secondAttribute="trailing" id="sB6-Do-9uE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a3Y-kW-bdH" secondAttribute="trailing" constant="8" id="sSd-EJ-vNc"/>
                             <constraint firstItem="pcD-2T-EFE" firstAttribute="leading" secondItem="Xc5-o5-NYK" secondAttribute="trailing" constant="8" id="sUO-Vy-m69"/>
                         </constraints>
@@ -341,6 +354,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="geolocation icon" width="128" height="128"/>
         <image name="windIcon" width="100" height="100"/>
     </resources>
 </document>

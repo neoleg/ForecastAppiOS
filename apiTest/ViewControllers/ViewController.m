@@ -193,7 +193,7 @@
 
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
+
     [self.locationManager requestWhenInUseAuthorization];
     
 }
@@ -214,14 +214,16 @@
     }
 }
 
+
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray<CLLocation *> *)locations API_AVAILABLE(ios(6.0), macos(10.9)) {
     
-    CLGeocoder *geocoder = [CLGeocoder new];    __weak __typeof(self) weakSelf = self;
+    CLGeocoder *geocoder = [CLGeocoder new];
+    __weak __typeof(self) weakSelf = self;
+    
     [geocoder reverseGeocodeLocation:[locations lastObject] completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
         NSString *cityName = myPlacemark.locality;
-        NSLog(@"----->%@",cityName);
         [weakSelf loadForecast:cityName];
     }];
      
@@ -231,6 +233,11 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
     NSLog(@"%@",error);
+}
+
+
+- (IBAction)currentLocationAction:(UIButton *)sender {
+    [self loadForCurrentLocation];
 }
 
 
