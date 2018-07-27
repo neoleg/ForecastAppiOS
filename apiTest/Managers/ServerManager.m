@@ -9,6 +9,13 @@
 #import "ServerManager.h"
 #import "AFNetworking.h"
 
+//CoreLocation
+//Permitions
+//Auth Status
+//Get current location
+//Get city using Geocoder
+//Display forecast for current city
+
 @implementation ServerManager
 
 + (ServerManager*) sharedManager {   //singletone
@@ -48,8 +55,29 @@
 }
 
 
++ (NSString *) prepareCityName:(NSString *) cityName {
+    
+    NSError *error = nil;
+    NSRegularExpression *replaceIncorrectSymbols = [NSRegularExpression regularExpressionWithPattern:@"[^\\p{L}\\p{M}\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *replaceSpaces = [NSRegularExpression regularExpressionWithPattern:@"[\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    cityName = [replaceIncorrectSymbols stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@""];
+    cityName = [replaceSpaces stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@"+"];
+    
+    if ([cityName characterAtIndex:0] == 43) {
+        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    if ([cityName characterAtIndex:cityName.length - 1] == 43) {
+        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(cityName.length - 1, 1) withString:@""];
+    }
+    NSLog(@"%@",cityName);
+    return cityName;
+}
+
+
 + (NSURL *) prepareURL:(NSString *) cityName {
-    cityName = [cityName stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    cityName = [self prepareCityName:cityName];
     
     NSString* baseUrl = @"https://api.openweathermap.org/data/2.5/forecast";
     NSString* apiKey = @"3e593b0d5a6c511ae11d069ed5c42860";
@@ -98,20 +126,28 @@
             
             NSMutableDictionary *dict = [NSMutableDictionary new];
             NSDictionary *listItem = list[i];
+            
+            // temperature
+            
             NSString *temperatureValue = [[listItem objectForKey:@"main"] objectForKey:@"temp"];
             NSString *temperature = [NSString stringWithFormat:@"%ld°", [temperatureValue integerValue]];
+            
+            [dict setObject:temperature forKey:@"temp"];
            
+            //date and time
+            
             NSString* dateString = [list[i] objectForKey:@"dt_txt"];
             NSDate *date = [dateFormat dateFromString:dateString];
-            
+
             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:date];
-            
+
             NSString* formatedTime = [NSString stringWithFormat:@"%02ld.%02ld",components.hour, components.minute];
             NSString* formatedDate = [NSString stringWithFormat:@"%02ld.%02ld",components.day, components.month];
             
-            [dict setObject:temperature forKey:@"temp"];
             [dict setObject:formatedDate forKey:@"date"];
             [dict setObject:formatedTime forKey:@"time"];
+            
+            //icons
             
             NSArray *weather = [listItem objectForKey:@"weather"];
             NSDictionary *weatherItem = weather.firstObject;

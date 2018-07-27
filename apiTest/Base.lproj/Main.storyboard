@@ -40,11 +40,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTk-Ch-Yqc">
-                                <rect key="frame" x="87.5" y="162" width="200" height="67"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="tTk-Ch-Yqc">
+                                <rect key="frame" x="16" y="162" width="343" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="Aif-uP-EO1"/>
-                                    <constraint firstAttribute="width" constant="200" id="Pyg-uF-G76"/>
+                                    <constraint firstAttribute="width" constant="343" id="Fl4-Cp-2Ps"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="44"/>
                                 <color key="textColor" red="0.01176470588" green="0.023529411760000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -176,6 +176,15 @@
                                     <constraint firstAttribute="height" constant="50" id="Itq-mc-DaS"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slN-ju-N60">
+                                <rect key="frame" x="287" y="72" width="40" height="40"/>
+                                <state key="normal" image="geolocation icon">
+                                    <color key="titleShadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="currentLocationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J4X-JG-Ubr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -195,12 +204,16 @@
                             <constraint firstItem="9t4-T5-6oJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="49" id="Wj9-kJ-efa"/>
                             <constraint firstItem="gcu-wd-Eby" firstAttribute="leading" secondItem="44x-QF-qk0" secondAttribute="trailing" id="Yqi-VB-4Dt"/>
                             <constraint firstItem="gcu-wd-Eby" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="aNs-iO-3Jr"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="width" secondItem="gcu-wd-Eby" secondAttribute="width" id="aa3-36-f6Z"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="height" secondItem="gcu-wd-Eby" secondAttribute="height" id="aok-fq-lSO"/>
                             <constraint firstItem="Xc5-o5-NYK" firstAttribute="leading" secondItem="JyZ-mA-5Pa" secondAttribute="trailing" constant="8" id="dPM-d1-D8k"/>
                             <constraint firstItem="a3Y-kW-bdH" firstAttribute="leading" secondItem="9t4-T5-6oJ" secondAttribute="trailing" constant="83" id="eJa-7M-xKy"/>
                             <constraint firstItem="owa-sd-lxI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eQT-1d-ReC"/>
                             <constraint firstItem="tTk-Ch-Yqc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fMl-yK-1fd"/>
+                            <constraint firstItem="slN-ju-N60" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="fsp-Uh-YgQ"/>
                             <constraint firstItem="Xc5-o5-NYK" firstAttribute="top" secondItem="a3Y-kW-bdH" secondAttribute="bottom" constant="15" id="g7c-Oc-1KI"/>
                             <constraint firstItem="W4d-h5-dhs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mec-DI-JTB"/>
+                            <constraint firstItem="gcu-wd-Eby" firstAttribute="leading" secondItem="slN-ju-N60" secondAttribute="trailing" id="sB6-Do-9uE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a3Y-kW-bdH" secondAttribute="trailing" constant="8" id="sSd-EJ-vNc"/>
                             <constraint firstItem="pcD-2T-EFE" firstAttribute="leading" secondItem="Xc5-o5-NYK" secondAttribute="trailing" constant="8" id="sUO-Vy-m69"/>
                         </constraints>
@@ -227,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-308" y="132"/>
+            <point key="canvasLocation" x="-74.400000000000006" y="131.78410794602701"/>
         </scene>
         <!--List view-->
         <scene sceneID="yUy-EA-xOY">
@@ -260,14 +273,20 @@
                                                         <constraint firstAttribute="width" secondItem="ZFx-di-rly" secondAttribute="height" multiplier="1:1" id="sMg-n7-sXQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-Qy-c6N">
-                                                    <rect key="frame" x="8" y="0.0" width="14" height="93"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-Qy-c6N">
+                                                    <rect key="frame" x="8" y="0.0" width="173" height="93"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="173" id="el0-Ux-1k2"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="30"/>
                                                     <color key="textColor" red="0.015686274510000001" green="0.047058823530000002" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8K-Ri-I4Q">
-                                                    <rect key="frame" x="345.5" y="31.5" width="13.5" height="30"/>
+                                                    <rect key="frame" x="302" y="0.0" width="65" height="93"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="kzl-fe-XO5"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="30"/>
                                                     <color key="textColor" red="0.015686274510000001" green="0.047058823530000002" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -276,11 +295,12 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="IMr-Qy-c6N" firstAttribute="top" secondItem="asC-Hf-RPt" secondAttribute="top" id="9Dw-cr-try"/>
-                                            <constraint firstItem="i8K-Ri-I4Q" firstAttribute="centerY" secondItem="asC-Hf-RPt" secondAttribute="centerY" id="G0g-Jq-Qtu"/>
                                             <constraint firstAttribute="bottom" secondItem="IMr-Qy-c6N" secondAttribute="bottom" id="NW1-Zd-QSp"/>
                                             <constraint firstAttribute="trailing" secondItem="ZFx-di-rly" secondAttribute="trailing" constant="93" id="Psr-9r-I6U"/>
                                             <constraint firstItem="IMr-Qy-c6N" firstAttribute="leading" secondItem="asC-Hf-RPt" secondAttribute="leading" constant="8" id="VQE-n5-ZqI"/>
-                                            <constraint firstAttribute="trailing" secondItem="i8K-Ri-I4Q" secondAttribute="trailing" constant="16" id="eaN-Nm-5OS"/>
+                                            <constraint firstItem="i8K-Ri-I4Q" firstAttribute="top" secondItem="asC-Hf-RPt" secondAttribute="top" id="Yjy-fw-YFL"/>
+                                            <constraint firstAttribute="bottom" secondItem="i8K-Ri-I4Q" secondAttribute="bottom" id="nmO-NQ-OKg"/>
+                                            <constraint firstAttribute="trailing" secondItem="i8K-Ri-I4Q" secondAttribute="trailing" constant="8" id="ppe-9B-D8B"/>
                                             <constraint firstItem="ZFx-di-rly" firstAttribute="top" secondItem="asC-Hf-RPt" secondAttribute="top" id="yOo-0C-rBL"/>
                                             <constraint firstAttribute="bottom" secondItem="ZFx-di-rly" secondAttribute="bottom" id="yWF-Ca-Su5"/>
                                         </constraints>
@@ -314,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k6n-AM-VEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="132"/>
+            <point key="canvasLocation" x="684" y="131.78410794602701"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OVD-q5-LbG">
@@ -334,6 +354,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="geolocation icon" width="128" height="128"/>
         <image name="windIcon" width="100" height="100"/>
     </resources>
 </document>
