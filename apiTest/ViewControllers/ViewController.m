@@ -193,7 +193,6 @@
 
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-
     [self.locationManager requestWhenInUseAuthorization];
     
 }
@@ -226,7 +225,6 @@
         NSString *cityName = myPlacemark.locality;
         [weakSelf loadForecast:cityName];
     }];
-     
 }
 
 
