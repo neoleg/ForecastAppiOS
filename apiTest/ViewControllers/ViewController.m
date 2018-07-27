@@ -49,7 +49,6 @@
     //[self loadForecast:nil];
     [self loadForCurrentLocation];
     [self initBanner];
-    [self addAdvertisment];
 
 }
 
@@ -175,15 +174,12 @@
 */
 
 
-#pragma mark - advertising
+#pragma mark - advertisment
 
 
 - (void) initBanner {
     self.bannerView.adUnitID = @"ca-app-pub-2355698657310174/5553214788";
     self.bannerView.rootViewController = self;
-}
-
-- (void) addAdvertisment {
     GADRequest *request = [GADRequest request];
     request.testDevices = @[ kGADSimulatorID ];
     [self.bannerView loadRequest:request];
