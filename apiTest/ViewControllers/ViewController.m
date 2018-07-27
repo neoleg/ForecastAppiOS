@@ -45,7 +45,7 @@
     [super viewDidLoad];
     //[[DataManager dataManager] clearCore];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
     //[self loadForecast:nil];
     [self loadForCurrentLocation];
     [self initBanner];
@@ -194,25 +194,41 @@
 
 
 - (void) loadForCurrentLocation {
+
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
     
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager requestLocation];
+    [self.locationManager requestWhenInUseAuthorization];
     
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+    switch (status) {
+        case kCLAuthorizationStatusDenied:
+            [self loadForecast:nil];
+            break;
+        
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            [self.locationManager requestLocation];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray<CLLocation *> *)locations API_AVAILABLE(ios(6.0), macos(10.9)) {
-    CLGeocoder *geocoder = [CLGeocoder new];
-    __block NSString *cityName = nil;
     
-    [geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    CLGeocoder *geocoder = [CLGeocoder new];    __weak __typeof(self) weakSelf = self;
+    [geocoder reverseGeocodeLocation:[locations lastObject] completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
-        cityName = myPlacemark.locality;
-        [self loadForecast:cityName];
+        NSString *cityName = myPlacemark.locality;
+        NSLog(@"----->%@",cityName);
+        [weakSelf loadForecast:cityName];
     }];
+     
 }
 
 

@@ -55,8 +55,29 @@
 }
 
 
++ (NSString *) prepareCityName:(NSString *) cityName {
+    
+    NSError *error = nil;
+    NSRegularExpression *replaceIncorrectSymbols = [NSRegularExpression regularExpressionWithPattern:@"[^\\p{L}\\p{M}\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *replaceSpaces = [NSRegularExpression regularExpressionWithPattern:@"[\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    cityName = [replaceIncorrectSymbols stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@""];
+    cityName = [replaceSpaces stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@"+"];
+    
+    if ([cityName characterAtIndex:0] == 43) {
+        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    }
+    if ([cityName characterAtIndex:cityName.length - 1] == 43) {
+        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(cityName.length - 1, 1) withString:@""];
+    }
+    NSLog(@"%@",cityName);
+    return cityName;
+}
+
+
 + (NSURL *) prepareURL:(NSString *) cityName {
-    cityName = [cityName stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    cityName = [self prepareCityName:cityName];
     
     NSString* baseUrl = @"https://api.openweathermap.org/data/2.5/forecast";
     NSString* apiKey = @"3e593b0d5a6c511ae11d069ed5c42860";
