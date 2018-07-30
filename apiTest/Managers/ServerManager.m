@@ -61,14 +61,18 @@
     NSRegularExpression *replaceIncorrectSymbols = [NSRegularExpression regularExpressionWithPattern:@"[^\\p{L}\\p{M}\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
     NSRegularExpression *replaceSpaces = [NSRegularExpression regularExpressionWithPattern:@"[\\s]+" options:NSRegularExpressionCaseInsensitive error:&error];
     
-    cityName = [replaceIncorrectSymbols stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@""];
-    cityName = [replaceSpaces stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@"+"];
-    
-    if ([cityName characterAtIndex:0] == 43) {
-        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-    }
-    if ([cityName characterAtIndex:cityName.length - 1] == 43) {
-        cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(cityName.length - 1, 1) withString:@""];
+    if (cityName != nil) {
+        cityName = [replaceIncorrectSymbols stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@""];
+        cityName = [replaceSpaces stringByReplacingMatchesInString:cityName options:0 range:NSMakeRange(0, cityName.length) withTemplate:@"+"];
+        
+        if ([cityName characterAtIndex:0] == 43) {
+            cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        }
+        if ([cityName characterAtIndex:cityName.length - 1] == 43) {
+            cityName = [cityName stringByReplacingCharactersInRange:NSMakeRange(cityName.length - 1, 1) withString:@""];
+        }
+    } else {
+        NSLog(@"CITY NAME IS NIL");
     }
     NSLog(@"%@",cityName);
     return cityName;

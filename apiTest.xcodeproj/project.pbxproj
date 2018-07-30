@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6EAE626D77CD47996E3B9BCD /* Pods_apiTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FAD879B632446AB87C4C5E3 /* Pods_apiTest.framework */; };
+		8B28DB07210F2F2200444A47 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B28DB06210F2F2100444A47 /* MapKit.framework */; };
+		8B28DB0A210F336D00444A47 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B28DB09210F336D00444A47 /* MapViewController.m */; };
+		8B28DB0D210F3C2500444A47 /* ForecastOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B28DB0C210F3C2500444A47 /* ForecastOnMapViewController.m */; };
+		8B28DB0F210F536D00444A47 /* Assets 17-07-03-389.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B28DB0E210F536C00444A47 /* Assets 17-07-03-389.xcassets */; };
 		8B2E6B8A2101FCCB00A3E424 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E6B882101FCCB00A3E424 /* Model.xcdatamodeld */; };
 		8B2E6B8D210221D800A3E424 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E6B8C210221D800A3E424 /* DataManager.m */; };
 		8B2E6BBB2105CFF000A3E424 /* UIImageView+ImageWithUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E6BBA2105CFF000A3E424 /* UIImageView+ImageWithUrl.m */; };
@@ -22,7 +26,6 @@
 		8B96552D20FDFD230005B64B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B96552C20FDFD230005B64B /* main.m */; };
 		8B96553520FDFD4D0005B64B /* Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B96553420FDFD4D0005B64B /* Gradient.m */; };
 		8B96553A20FE0B890005B64B /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B96553920FE0B890005B64B /* ServerManager.m */; };
-		8B96553C20FE408D0005B64B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B96553B20FE408D0005B64B /* Assets.xcassets */; };
 		8BD2109F2109E89E00EC9599 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD2109E2109E89D00EC9599 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,12 @@
 		098544F61C01D9C0A189793A /* Pods-apiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apiTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-apiTest/Pods-apiTest.release.xcconfig"; sourceTree = "<group>"; };
 		1FAD879B632446AB87C4C5E3 /* Pods_apiTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apiTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		678B2CBC1F2BD72AA8F38603 /* Pods-apiTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apiTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-apiTest/Pods-apiTest.debug.xcconfig"; sourceTree = "<group>"; };
+		8B28DB06210F2F2100444A47 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8B28DB08210F336D00444A47 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		8B28DB09210F336D00444A47 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		8B28DB0B210F3C2500444A47 /* ForecastOnMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForecastOnMapViewController.h; sourceTree = "<group>"; };
+		8B28DB0C210F3C2500444A47 /* ForecastOnMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForecastOnMapViewController.m; sourceTree = "<group>"; };
+		8B28DB0E210F536C00444A47 /* Assets 17-07-03-389.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets 17-07-03-389.xcassets"; path = "../../../Users/developer/.Trash/Assets 17-07-03-389.xcassets"; sourceTree = "<group>"; };
 		8B2E6B892101FCCB00A3E424 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8B2E6B8B210221D800A3E424 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		8B2E6B8C210221D800A3E424 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
@@ -55,7 +64,6 @@
 		8B96553420FDFD4D0005B64B /* Gradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Gradient.m; sourceTree = "<group>"; };
 		8B96553820FE0B890005B64B /* ServerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerManager.h; sourceTree = "<group>"; };
 		8B96553920FE0B890005B64B /* ServerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
-		8B96553B20FE408D0005B64B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BD2109E2109E89D00EC9599 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -64,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B28DB07210F2F2200444A47 /* MapKit.framework in Frameworks */,
 				8BD2109F2109E89E00EC9599 /* CoreLocation.framework in Frameworks */,
 				8B8658D32101F6C50051D6FC /* CoreData.framework in Frameworks */,
 				6EAE626D77CD47996E3B9BCD /* Pods_apiTest.framework in Frameworks */,
@@ -111,6 +120,10 @@
 				8B96552120FDFD220005B64B /* ViewController.m */,
 				8B8658A72101E0E00051D6FC /* ListViewController.h */,
 				8B8658A82101E0E00051D6FC /* ListViewController.m */,
+				8B28DB08210F336D00444A47 /* MapViewController.h */,
+				8B28DB09210F336D00444A47 /* MapViewController.m */,
+				8B28DB0B210F3C2500444A47 /* ForecastOnMapViewController.h */,
+				8B28DB0C210F3C2500444A47 /* ForecastOnMapViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -151,9 +164,9 @@
 				8B2E6BBE2105D04500A3E424 /* ViewControllers */,
 				8B2E6BBD2105D02800A3E424 /* Cells */,
 				8B2E6BBC2105D00300A3E424 /* Managers */,
-				8B96553B20FE408D0005B64B /* Assets.xcassets */,
 				8B96552320FDFD220005B64B /* Main.storyboard */,
 				8B96552820FDFD230005B64B /* LaunchScreen.storyboard */,
+				8B28DB0E210F536C00444A47 /* Assets 17-07-03-389.xcassets */,
 				8B96552B20FDFD230005B64B /* Info.plist */,
 				8B96552C20FDFD230005B64B /* main.m */,
 				8B2E6B882101FCCB00A3E424 /* Model.xcdatamodeld */,
@@ -166,6 +179,7 @@
 		A4C59B2DB527127D8E72A543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B28DB06210F2F2100444A47 /* MapKit.framework */,
 				8BD2109E2109E89D00EC9599 /* CoreLocation.framework */,
 				8B8658D22101F6C40051D6FC /* CoreData.framework */,
 				1FAD879B632446AB87C4C5E3 /* Pods_apiTest.framework */,
@@ -232,8 +246,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B28DB0F210F536D00444A47 /* Assets 17-07-03-389.xcassets in Resources */,
 				8B96552A20FDFD230005B64B /* LaunchScreen.storyboard in Resources */,
-				8B96553C20FE408D0005B64B /* Assets.xcassets in Resources */,
 				8B96552520FDFD220005B64B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,8 +303,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B63C6F82100D04400E5EE31 /* ForecastCell.m in Sources */,
+				8B28DB0D210F3C2500444A47 /* ForecastOnMapViewController.m in Sources */,
 				8B2E6B8D210221D800A3E424 /* DataManager.m in Sources */,
 				8B96552220FDFD220005B64B /* ViewController.m in Sources */,
+				8B28DB0A210F336D00444A47 /* MapViewController.m in Sources */,
 				8B8658A92101E0E00051D6FC /* ListViewController.m in Sources */,
 				8B96552D20FDFD230005B64B /* main.m in Sources */,
 				8B2E6BBB2105CFF000A3E424 /* UIImageView+ImageWithUrl.m in Sources */,
