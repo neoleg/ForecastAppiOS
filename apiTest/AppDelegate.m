@@ -5,6 +5,12 @@
 //  Created by DeveloperMB on 7/17/18.
 //  Copyright © 2018 DeveloperMB. All rights reserved.
 //
+//CoreLocation
+//Permitions
+//Autherize Status
+//Get current location
+//Get city using Geocoder
+//Display forecast for current city
 
 #import "AppDelegate.h"
 #import "DataManager.h"
