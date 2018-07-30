@@ -40,6 +40,14 @@
     CGPoint touchPoint = [sender locationInView:self.mapView];
     CLLocationCoordinate2D location2D = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     
+    //add pin
+    
+    MKPointAnnotation *pin = [MKPointAnnotation new];
+    [pin setCoordinate:location2D];
+    [self.mapView addAnnotation:pin];
+    
+    // load view with forecast
+    
     CLLocation *location = [[CLLocation alloc] initWithLatitude:location2D.latitude longitude:location2D.longitude];
     
     ForecastOnMapViewController *forecastViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForecastOnMapViewController"];
@@ -50,7 +58,8 @@
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
         NSString *cityName = myPlacemark.locality;
-        NSLog(@"------->%@",cityName);
+        [pin setTitle:[NSString stringWithFormat:@"%@", cityName]];
+        [pin setSubtitle:@"sunny, t 25"];
         [forecastViewController loadForecast:cityName];
     }];
 }
