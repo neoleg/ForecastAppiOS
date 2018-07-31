@@ -12,18 +12,18 @@
 #import "ForecastOnMapViewController.h"
 #import "MBProgressHUD.h"
 
-@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-//@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
+
 
 @implementation MapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mapView.delegate = self;
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -34,33 +34,45 @@
 
 - (IBAction)longPressHandler:(UILongPressGestureRecognizer *)sender {
     
-    if (sender.state != UIGestureRecognizerStateBegan)
-        return;
+    //get coords
     
     CGPoint touchPoint = [sender locationInView:self.mapView];
     CLLocationCoordinate2D location2D = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     
-    //add pin
-    
-    MKPointAnnotation *pin = [MKPointAnnotation new];
-    [pin setCoordinate:location2D];
-    [self.mapView addAnnotation:pin];
-    
-    // load view with forecast
+    // init view with forecast
     
     CLLocation *location = [[CLLocation alloc] initWithLatitude:location2D.latitude longitude:location2D.longitude];
-    
     ForecastOnMapViewController *forecastViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForecastOnMapViewController"];
     
-    [self presentViewController:forecastViewController animated:YES completion:nil];
     
     CLGeocoder *geocoder = [CLGeocoder new];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
         NSString *cityName = myPlacemark.locality;
-        [pin setTitle:[NSString stringWithFormat:@"%@", cityName]];
-        [pin setSubtitle:@"sunny, t 25"];
-        [forecastViewController loadForecast:cityName];
+        if (cityName != nil) {
+            
+            // add pin
+            
+            MKPointAnnotation *pin = [MKPointAnnotation new];
+            [pin setCoordinate:location2D];
+            [self.mapView addAnnotation:pin];
+            
+            // load forecast view
+            
+            [self presentViewController:forecastViewController animated:YES completion:nil];
+            [forecastViewController loadForecast:cityName withPin:pin];
+            
+        } else {
+            
+            //alert
+            
+            UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Something gone wrong..." message:@"City not found" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [errorAlert addAction:defaultAction];
+            [self presentViewController:errorAlert animated:YES completion:nil];
+        }
     }];
 }
 

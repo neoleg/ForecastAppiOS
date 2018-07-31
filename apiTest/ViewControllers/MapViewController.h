@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class MKPointAnnotation;
+
 @interface MapViewController : UIViewController
 
 @end

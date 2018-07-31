@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class MKPointAnnotation;
+
 @interface ForecastOnMapViewController : UIViewController
 
-- (void) loadForecast:(NSString *) cityName;
+@property (strong, nonatomic) NSArray* forecast;
+
+- (void) loadForecast:(NSString *) cityName withPin:(MKPointAnnotation *) pin;
 
 @end

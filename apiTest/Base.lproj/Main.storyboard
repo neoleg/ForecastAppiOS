@@ -361,7 +361,7 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyV-dd-HGa">
                                 <rect key="frame" x="317" y="72" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="cjL-bs-YFb"/>
                                     <constraint firstAttribute="height" constant="50" id="vJo-mK-zDx"/>
@@ -505,7 +505,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YZG-x0-9bH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1720.8" y="-226.23688155922042"/>
+            <point key="canvasLocation" x="993" y="-281"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OVD-q5-LbG">
