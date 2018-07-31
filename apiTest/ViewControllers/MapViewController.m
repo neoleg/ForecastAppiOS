@@ -34,46 +34,50 @@
 
 - (IBAction)longPressHandler:(UILongPressGestureRecognizer *)sender {
     
-    //get coords
-    
-    CGPoint touchPoint = [sender locationInView:self.mapView];
-    CLLocationCoordinate2D location2D = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-    
-    // init view with forecast
-    
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:location2D.latitude longitude:location2D.longitude];
-    ForecastOnMapViewController *forecastViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForecastOnMapViewController"];
-    
-    
-    CLGeocoder *geocoder = [CLGeocoder new];
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
-        NSString *cityName = myPlacemark.locality;
-        if (cityName != nil) {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        
+        //get coords
+        
+        CGPoint touchPoint = [sender locationInView:self.mapView];
+        CLLocationCoordinate2D location2D = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        
+        // init view with forecast
+        
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:location2D.latitude longitude:location2D.longitude];
+        
+        __weak __typeof(self) weakSelf = self;
+        CLGeocoder *geocoder = [CLGeocoder new];
+        [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+            CLPlacemark *myPlacemark = [placemarks objectAtIndex:0];
+            NSString *cityName = myPlacemark.locality;
             
-            // add pin
-            
-            MKPointAnnotation *pin = [MKPointAnnotation new];
-            [pin setCoordinate:location2D];
-            [self.mapView addAnnotation:pin];
-            
-            // load forecast view
-            
-            [self presentViewController:forecastViewController animated:YES completion:nil];
-            [forecastViewController loadForecast:cityName withPin:pin];
-            
-        } else {
-            
-            //alert
-            
-            UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Something gone wrong..." message:@"City not found" preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            [errorAlert addAction:defaultAction];
-            [self presentViewController:errorAlert animated:YES completion:nil];
-        }
-    }];
+            if (cityName != nil) {
+                
+                // add empty pin
+                
+                MKPointAnnotation *pin = [MKPointAnnotation new];
+                [pin setCoordinate:location2D];
+                [weakSelf.mapView addAnnotation:pin];
+                
+                // show forecast view
+                
+                ForecastOnMapViewController *forecastViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForecastOnMapViewController"];
+                [weakSelf presentViewController:forecastViewController animated:YES completion:nil];
+                [forecastViewController loadForecast:cityName withPin:pin];
+                
+            } else {
+                
+                //alert
+                
+                UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Something gone wrong..." message:@"City not found" preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [errorAlert addAction:defaultAction];
+                [weakSelf presentViewController:errorAlert animated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 

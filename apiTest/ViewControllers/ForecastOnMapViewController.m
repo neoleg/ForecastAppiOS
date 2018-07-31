@@ -14,6 +14,9 @@
 #import "MBProgressHUD.h"
 
 @interface ForecastOnMapViewController ()
+
+@property (strong, nonatomic) NSArray* forecast;
+
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
@@ -25,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
 }
 
 
@@ -38,7 +40,7 @@
                 
                 //set info to view
                 
-                NSString *temperature = [self.forecast[0] objectForKey:@"temp"];
+                NSString *temperature = [self.forecast.firstObject objectForKey:@"temp"];
                 NSString *weatherDescription = [self.forecast[0] objectForKey:@"icon"];
                 
                 self.cityNameLabel.text = [[self.forecast lastObject] objectForKey:@"cityName"];

@@ -12,8 +12,6 @@
 
 @interface ForecastOnMapViewController : UIViewController
 
-@property (strong, nonatomic) NSArray* forecast;
-
 - (void) loadForecast:(NSString *) cityName withPin:(MKPointAnnotation *) pin;
 
 @end
